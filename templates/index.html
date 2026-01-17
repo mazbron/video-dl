@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Downloader</title>
+    <meta name="description" content="Download videos from YouTube, TikTok, and 1000+ platforms">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">▶</span>
+                <h1>Video<span>DL</span></h1>
+            </div>
+            <p class="tagline">Download from YouTube, TikTok & 1000+ platforms</p>
+        </header>
+
+        <!-- Tabs -->
+        <nav class="tabs">
+            <button class="tab active" data-tab="single">
+                <span class="tab-icon">📹</span>
+                Single Video
+            </button>
+            <button class="tab" data-tab="channel">
+                <span class="tab-icon">📁</span>
+                Channel/Playlist
+            </button>
+        </nav>
+
+        <!-- Single Video Tab -->
+        <section id="single-tab" class="tab-content active">
+            <div class="input-group">
+                <input type="text" id="video-url" placeholder="Paste video URL here..." class="url-input">
+                <button id="fetch-btn" class="btn btn-primary">
+                    <span class="btn-icon">🔍</span>
+                    Fetch
+                </button>
+            </div>
+
+            <!-- Video Preview -->
+            <div id="video-preview" class="video-preview hidden">
+                <div class="preview-thumbnail">
+                    <img id="preview-thumb" src="" alt="Thumbnail">
+                </div>
+                <div class="preview-info">
+                    <h3 id="preview-title">Video Title</h3>
+                    <p id="preview-uploader">Uploader</p>
+                    <p id="preview-duration">Duration: --:--</p>
+                </div>
+            </div>
+
+            <!-- Quality Selection -->
+            <div id="quality-section" class="quality-section hidden">
+                <label>Select Quality:</label>
+                <select id="quality-select" class="quality-select">
+                    <option value="best">Best Quality</option>
+                </select>
+                <button id="download-btn" class="btn btn-success btn-large">
+                    <span class="btn-icon">⬇️</span>
+                    Download
+                </button>
+            </div>
+        </section>
+
+        <!-- Channel Tab -->
+        <section id="channel-tab" class="tab-content">
+            <div class="input-group">
+                <input type="text" id="channel-url" placeholder="Paste channel/playlist URL..." class="url-input">
+                <input type="number" id="max-videos" placeholder="Max videos" value="10" min="1" max="100" class="max-input">
+                <button id="fetch-channel-btn" class="btn btn-primary">
+                    <span class="btn-icon">🔍</span>
+                    Fetch
+                </button>
+            </div>
+
+            <!-- Video List -->
+            <div id="video-list" class="video-list hidden">
+                <div class="list-header">
+                    <h3><span id="video-count">0</span> Videos Found</h3>
+                    <div class="batch-controls">
+                        <select id="batch-quality" class="quality-select">
+                            <option value="best">Best Quality</option>
+                            <option value="bestvideo[height<=1080]+bestaudio">1080p</option>
+                            <option value="bestvideo[height<=720]+bestaudio">720p</option>
+                            <option value="bestvideo[height<=480]+bestaudio">480p</option>
+                            <option value="bestaudio">Audio Only</option>
+                        </select>
+                        <button id="download-all-btn" class="btn btn-success">
+                            <span class="btn-icon">⬇️</span>
+                            Download All
+                        </button>
+                    </div>
+                </div>
+                <div id="videos-container" class="videos-container"></div>
+            </div>
+        </section>
+
+        <!-- Download Queue -->
+        <section id="download-queue" class="download-queue hidden">
+            <h3>📥 Download Queue</h3>
+            <div id="queue-container" class="queue-container"></div>
+        </section>
+
+        <!-- Toast Notifications -->
+        <div id="toast-container" class="toast-container"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="/static/app.js"></script>
+</body>
+</html>
